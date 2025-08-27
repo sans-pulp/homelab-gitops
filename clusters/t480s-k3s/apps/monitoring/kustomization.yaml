@@ -4,4 +4,11 @@ resources:
   - ../../namespaces/monitoring.yaml
   - helmrepository.yaml
   - helmrelease.yaml
-  - kustomization.secretgen.yaml
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+secretGenerator:
+  - name: additional-scrape-configs
+    files:
+      - additional-scrapes.yaml
