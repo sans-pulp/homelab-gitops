@@ -1,0 +1,43 @@
+- job_name: 'node_exporter-vms'
+  static_configs:
+    - targets: 
+        - '192.168.122.10:9100'
+        - '192.168.122.11:9100'
+        - '192.168.122.12:9100'
+      labels:
+        env: libvirt
+    - targets: ['192.168.122.10:9100']
+      labels:
+        env: libvirt
+        node: k8s-master 
+    - targets: ['192.168.122.11:9100']
+      labels:
+        env: libvirt
+        node: k8s-worker1
+    - targets: ['192.168.122.12:9100']
+      labels:
+        env: libvirt
+        node: k8s-worker2
+
+- job_name: 'media-server-host'
+  static_configs: 
+    - targets: ['10.0.0.55:9100'] # node_exporter for host metrics
+      labels:
+        env: media-server
+        node: host
+
+- job_name: 'media-server-containers'
+  static_configs:
+    - targets: ['10.0.0.55:8080'] # cAdvisor
+      labels:
+        service: cadvisor
+
+- job_name: 'media-server-apps'
+  static_configs:
+    - targets:
+      - '10.0.0.55:9707' #Sonarr
+      - '10.0.0.55:9708' #Radarr
+      - '10.0.0.55:9709' #Prowlarr
+      - '10.0.0.55:8000' #qBittorrent
+      labels:
+        env: media-server

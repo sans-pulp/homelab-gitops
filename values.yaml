@@ -1,0 +1,12 @@
+grafana:
+  env:
+    GF_SERVER_ROOT_URL: https://homelab-t480s.tailb18fbd.ts.net/grafana
+    GF_SERVER_SERVE_FROM_SUB_PATH: "true"
+  grafana.ini:
+    server:
+      root_url: https://homelab-t480s.tailb18fbd.ts.net/grafana
+      serve_from_sub_path: true
+prometheus:
+  prometheusSpec:
+    externalUrl: https://homelab-t480s.tailb18fbd.ts.net/prometheus
+    routePrefix: /prometheus
