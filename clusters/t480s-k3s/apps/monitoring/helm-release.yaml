@@ -1,0 +1,70 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: kube-prometheus-stack
+  namespace: monitoring
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: kube-prometheus-stack
+      version: "45.7.1" # It is recommended to pin the version
+      sourceRef:
+        kind: HelmRepository
+        name: prometheus-community
+        namespace: flux-system
+  values:
+    grafana:
+      env:
+        GF_SERVER_ROOT_URL: https://homelab-t480s.tailb18fbd.ts.net/grafana
+        GF_SERVER_SERVE_FROM_SUB_PATH: "true"
+      grafana.ini:
+        server:
+          root_url: "https://homelab-t480s.tailb18fbd.ts.net/grafana"
+          serve_from_sub_path: true
+
+    prometheus:
+      prometheusSpec:
+        externalUrl: https://homelab-t480s.tailb18fbd.ts.net/prometheus
+        routePrefix: /prometheus
+        additionalScrapeConfigs:
+          - job_name: 'node_exporter-vms'
+            static_configs:
+              - targets:
+                  - '192.168.122.10:9100'
+                  - '192.168.122.11:9100'
+                  - '192.168.122.12:9100'
+                labels:
+                  env: libvirt
+              - targets: ['192.168.122.10:9100']
+                labels:
+                  env: libvirt
+                  node: k8s-master
+              - targets: ['192.168.122.11:9100']
+                labels:
+                  env: libvirt
+                  node: k8s-worker1
+              - targets: ['192.168.122.12:9100']
+                labels:
+                  env: libvirt
+                  node: k8s-worker2
+          - job_name: 'media-server-host'
+            static_configs:
+              - targets: ['10.0.0.55:9100']
+                labels:
+                  env: media-server
+                  node: host
+          - job_name: 'media-server-containers'
+            static_configs:
+              - targets: ['10.0.0.55:8080']
+                labels:
+                  service: cadvisor
+          - job_name: 'media-server-apps'
+            static_configs:
+              - targets:
+                  - '10.0.0.55:9707' #Sonarr
+                  - '10.0.0.55:9708' #Radarr
+                  - '10.0.0.55:9709' #Prowlarr
+                  - '10.0.0.55:8000' #qBittorrent
+                labels:
+                  env: media-server
