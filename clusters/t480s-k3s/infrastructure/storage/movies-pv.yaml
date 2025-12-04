@@ -10,3 +10,6 @@ spec:
     - ReadWriteOnce
   hostPath:
     path: "/home/ops/media-stack/movies"
+  claimRef:
+    name: movies-pvc
+    namespace: default

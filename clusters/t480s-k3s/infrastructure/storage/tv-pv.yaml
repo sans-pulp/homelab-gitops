@@ -10,3 +10,6 @@ spec:
     - ReadWriteOnce
   hostPath:
     path: "/home/ops/media-stack/tv"
+  claimRef:
+    name: tv-pvc
+    namespace: default
