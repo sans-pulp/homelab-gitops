@@ -10,4 +10,6 @@ spec:
     - ReadWriteOnce
   hostPath:
     path: "/home/ops/media-stack/config/radarr"
-
+  claimRef:
+    name: radarr-config-pvc
+    namespace: default

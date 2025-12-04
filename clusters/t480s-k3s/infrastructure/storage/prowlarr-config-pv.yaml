@@ -10,4 +10,6 @@ spec:
     - ReadWriteOnce
   hostPath:
     path: "/home/ops/media-stack/config/prowlarr"
-
+  claimRef:
+    name: prowlarr-config-pvc
+    namespace: default

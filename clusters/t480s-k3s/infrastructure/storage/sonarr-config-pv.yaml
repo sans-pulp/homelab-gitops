@@ -10,3 +10,6 @@ spec:
     - ReadWriteOnce
   hostPath:
     path: "/home/ops/media-stack/config/sonarr"
+  claimRef:
+    name: sonarr-config-pvc
+    namespace: default

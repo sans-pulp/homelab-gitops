@@ -10,4 +10,7 @@ spec:
     - ReadWriteOnce
   hostPath:
     path: "/home/ops/media-stack/config/qbittorrent"
+  claimRef:
+    name: qbittorrent-config-pvc
+    namespace: default
 
