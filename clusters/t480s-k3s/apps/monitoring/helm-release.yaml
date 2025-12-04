@@ -22,6 +22,13 @@ spec:
         server:
           root_url: "https://homelab-t480s.tailb18fbd.ts.net/grafana"
           serve_from_sub_path: true
+      ingress:
+        enabled: true
+        ingressClassName: nginx
+        hosts:
+          - homelab-t480s.tailb18fbd.ts.net
+        path: /grafana
+        tls: []
 
     prometheus:
       prometheusSpec:
@@ -68,3 +75,10 @@ spec:
                   - '10.0.0.55:8000' #qBittorrent
                 labels:
                   env: media-server
+      ingress:
+        enabled: true
+        ingressClassName: nginx
+        hosts:
+          - homelab-t480s.tailb18fbd.ts.net
+        path: /prometheus
+        tls: []
