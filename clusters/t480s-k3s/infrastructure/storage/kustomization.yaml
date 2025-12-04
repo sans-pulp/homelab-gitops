@@ -2,9 +2,15 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - sonarr-config-pv.yaml
+  - radarr-config-pv.yaml
+  - prowlarr-config-pv.yaml
+  - qbittorrent-config-pv.yaml
   - tv-pv.yaml
   - movies-pv.yaml
   - downloads-pv.yaml
   - tv-pvc.yaml
   - movies-pvc.yaml
   - downloads-pvc.yaml
+  - radarr-config-pvc.yaml
+  - prowlarr-config-pvc.yaml
+  - qbittorrent-config-pvc.yaml

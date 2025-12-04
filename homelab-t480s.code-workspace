@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../media-stack"
+		},
+		{
+			"path": "../homelab"
+		},
+		{
+			"path": "../k8s-lab"
+		}
+	],
+	"settings": {}
+}

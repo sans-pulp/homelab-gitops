@@ -1,8 +1,8 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: sonarr-config-pvc
-  namespace: default # We will deploy Sonarr to the 'default' namespace for now
+  name: qbittorrent-config-pvc
+  namespace: default
 spec:
   storageClassName: "local-storage"
   accessModes:
@@ -10,3 +10,4 @@ spec:
   resources:
     requests:
       storage: "1Gi"
+
